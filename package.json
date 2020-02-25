@@ -7,12 +7,18 @@
     "node": ">=12.14.1"
   },
   "scripts": {
-    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "build": "yarn run build-ts",
+    "build-ts": "tsc",
+    "debug": "tsc-watch --onSuccess \"yarn run watch-node\"",
+    "start": "tsc-watch --onSuccess \"yarn run watch-node\"",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn run watch-ts\" \"yarn run watch-node\"",
     "watch-ts": "tsc -w",
-    "watch-node": "nodemon dist/server.js"
+    "watch-node": "nodemon dist/index.js",
+    "watch-debug": "nodemon --inspect dist/index.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.2",
+    "@types/mongoose": "^5.7.1",
     "@types/node": "^13.7.4",
     "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@typescript-eslint/parser": "^2.20.0",
@@ -23,11 +29,13 @@
     "eslint-plugin-jest": "^23.8.0",
     "eslint-plugin-node": "^11.0.0",
     "nodemon": "^2.0.2",
+    "tsc-watch": "^4.1.0",
     "typescript": "^3.8.2"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mongoose": "^5.9.2",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "winston": "^3.2.1"

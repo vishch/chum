@@ -1,3 +1,2 @@
-import logger from './logger';
-
-export default logger;
+export { Store } from './data';
+export { Logger } from './logger';
