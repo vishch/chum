@@ -1,15 +1,15 @@
-import Startup from './startup';
+import App from './app';
 
-class App {
-  private startup: Startup;
+class Startup {
+  #app: App;
 
   constructor() {
-    this.startup = new Startup();
+    this.#app = new App();
   }
 
   public async init(): Promise<void> {
-    await this.startup.init();
+    await this.#app.init();
   }
 }
 
-new App().init();
+new Startup().init();

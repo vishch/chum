@@ -1,13 +1,13 @@
 import { OdmMongoose } from './odm-mongoose';
 
 export class Store {
-  private readonly odm: OdmMongoose;
+  readonly #odm: OdmMongoose;
 
   constructor() {
-    this.odm = new OdmMongoose();
+    this.#odm = new OdmMongoose();
   }
 
   public async init() {
-    await this.odm.init();
+    await this.#odm.init();
   }
 }

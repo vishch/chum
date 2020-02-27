@@ -18,21 +18,23 @@ module.exports = {
     'plugin:jest/recommended',
     'plugin:jest/style',
   ],
+  settings: {
+    "import/resolver": {
+      typescript: {}
+    },
+    "node": {
+      "resolvePaths": ["src"],
+      "tryExtensions": [".js", ".json", ".ts"]
+    }
+  },
   rules: {
     'linebreak-style': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
-    'node/no-missing-import': [
-      'error', {
-        'tryExtensions': [
-          '.js', 
-          '.json',
-          '.ts'
-        ]
-      }
-    ],
+    "node/no-extraneous-import": "off",
     'class-methods-use-this': 'off',
     'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     'lines-between-class-members': 'off',
+    
   }
 };

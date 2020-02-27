@@ -14,19 +14,7 @@ export class LoggerWinston {
   }
 
   public init(): void {
-    const options: winston.LoggerOptions = {
-      transports: [
-        new winston.transports.Console({
-          level: process.env.NODE_ENV === 'production' ? 'error' : 'debug',
-          format: winston.format.combine(
-            winston.format.timestamp(),
-            winston.format.simple(),
-            winston.format.printf((msg) => winston.format.colorize().colorize(msg.level, `${msg.timestamp} - ${msg.level}: ${msg.message}`)),
-          ),
-        }),
-        // new winston.transports.File({ filename: 'debug.log', level: 'debug' }),
-      ],
-    };
+    const options = this.getOptions();
 
     LoggerWinston.logger = winston.createLogger(options);
 
@@ -52,5 +40,16 @@ export class LoggerWinston {
 
   private getMessage(message: string) {
     return `${this.callerName}: ${message}`;
+  }
+
+  private getOptions(): winston.LoggerOptions {
+    return {
+      transports: [
+        new winston.transports.Console({
+          level: process.env.NODE_ENV === 'production' ? 'error' : 'debug',
+        }),
+        new winston.transports.File({ filename: 'debug.log', level: 'debug' }),
+      ],
+    };
   }
 }
