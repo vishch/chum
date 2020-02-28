@@ -12,6 +12,7 @@
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "watch": "tsc-watch --onSuccess \"yarn run watch-node\"",
     "watch-node": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
+    "docker-up": "node -r ts-node/register -r tsconfig-paths/register dist/index.js",
     "lint": "eslint \"src/**/*.{js,ts}\""
   },
   "devDependencies": {
@@ -31,7 +32,6 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.8.0",
     "eslint-plugin-node": "^11.0.0",
-    "ts-node": "^8.6.2",
     "tsc-watch": "^4.1.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.2"
@@ -47,6 +47,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "ts-node": "^8.6.2",
     "winston": "^3.2.1"
   }
 }

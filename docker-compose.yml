@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  node:
+    image: chum
+    build: 
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - 3000:3000
+    networks: 
+      - chum-network
+    depends_on: 
+      - mongodb
+
+  mongodb:
+    image: mongo
+    networks: 
+      - chum-network
+  
+networks: 
+  chum-network:
+    driver: bridge
