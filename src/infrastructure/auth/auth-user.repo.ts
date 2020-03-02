@@ -7,4 +7,8 @@ export class AuthUserRepo {
 
     return (await userDocument.save()).toObject();
   }
+
+  async findByUsername(username: string): Promise<AuthUser> {
+    return (await AuthUserModel.findOne({ username }).exec())?.toObject();
+  }
 }

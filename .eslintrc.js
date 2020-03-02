@@ -35,6 +35,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     'lines-between-class-members': 'off',
-    
+    'consistent-return': 'off',
   }
 };

@@ -5,6 +5,7 @@ ENV PORT=3000
 ENV MONGO_SERVER=mongodb://mongodb
 ENV MONGO_DB=chum
 ENV TOKEN_SECRET=my_jwt_secret_key1
+ENV TOKEN_EXPIRATION_S=300
 ENV HASH_COST=10
 
 WORKDIR /usr/src/app

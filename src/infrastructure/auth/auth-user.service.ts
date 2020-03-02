@@ -8,7 +8,16 @@ export class AuthUserService {
     this.#authUserRepo = new AuthUserRepo();
   }
 
-  saveUser(username: string, passwordHash: string): Promise<AuthUser> {
+  async saveUser(username: string, passwordHash: string): Promise<AuthUser> {
+    const user = await this.findByUsername(username);
+    if (user) {
+      return null;
+    }
+
     return this.#authUserRepo.saveUser(username, passwordHash);
+  }
+
+  findByUsername(username: string): Promise<AuthUser> {
+    return this.#authUserRepo.findByUsername(username);
   }
 }

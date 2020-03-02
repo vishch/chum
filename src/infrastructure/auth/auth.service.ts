@@ -9,9 +9,11 @@ export class AuthService {
     this.#authUserService = new AuthUserService();
   }
 
-  async signup(username: string, password: string) {
+  async signup(username: string, password: string): Promise<boolean> {
     const passwordHash = await Crypto.hash(password, AppConfig.HASH_COST);
 
-    await this.#authUserService.saveUser(username, passwordHash);
+    const user = await this.#authUserService.saveUser(username, passwordHash);
+
+    return !!user;
   }
 }

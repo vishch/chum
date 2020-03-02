@@ -11,5 +11,9 @@
   },
   "typescript.referencesCodeLens.enabled": true,
   "eslint.format.enable": true,
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "files.exclude": {
+    "dist/**/*": true,
+    "node_modules/**/*": true
+  }
 }
