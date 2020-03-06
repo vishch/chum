@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { AppConfig } from 'utils/config';
@@ -23,6 +24,7 @@ export default class App {
     this.app = express();
     const port = AppConfig.PORT || 3000;
 
+    this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
 
