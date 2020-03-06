@@ -17,6 +17,14 @@ services:
     image: mongo
     networks: 
       - chum-network
+
+  angular:
+    image: chum-client
+    build: ./client
+    ports: 
+      - '3200:3200'
+    networks: 
+      - chum-network
   
 networks: 
   chum-network:
