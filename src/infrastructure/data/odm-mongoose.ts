@@ -19,7 +19,9 @@ export class OdmMongoose {
     const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
 
     try {
+      this.#logger.info('Mongoose connecting...');
       await mongoose.connect(connection, options);
+      this.#logger.info('Mongoose connected!');
     } catch (error) {
       this.#logger.error(`Mongoose connection failed - ${error}`);
     }
