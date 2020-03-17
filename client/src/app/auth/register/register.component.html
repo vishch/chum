@@ -1,0 +1,34 @@
+<div class="main">
+
+  <section class="auth">
+    <div class="container">
+      <div class="auth-content">
+        <form #authForm="ngForm" id="auth-form" class="auth-form" (ngSubmit)="onSubmit(authForm)">
+          <h2 class="form-title">Create account</h2>
+          <div class="form-group">
+            <input ngModel type="text" class="form-input" name="name" id="name" placeholder="Your Name" />
+          </div>
+          <div class="form-group">
+            <input ngModel type="email" class="form-input" name="email" id="email" placeholder="Your Email" />
+          </div>
+          <div class="form-group">
+            <input ngModel type="password" class="form-input" name="password" id="password" placeholder="Password" />
+            <span class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+          </div>
+          <div class="form-group">
+            <input ngModel type="password" class="form-input" name="re_password" id="re_password"
+              placeholder="Repeat your password" />
+          </div>
+          <div class="form-group">
+            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+          </div>
+        </form>
+        <p class="auth-mode">
+          Already have an account ? <button class="btn btn-link auth-mode-link" (click)='onSwitchToLogin()'>Login
+            here</button>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</div>

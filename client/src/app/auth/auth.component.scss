@@ -140,7 +140,7 @@ h2 {
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%); }
 
-.signup-content {
+.auth-content {
   background: #fff;
   border-radius: 10px;
   -moz-border-radius: 10px;
@@ -283,14 +283,14 @@ input[type=checkbox]:not(old):checked + label > span:before {
 .term-service {
   color: #555; }
 
-.loginhere {
+.auth-mode {
   color: #555;
   font-weight: 500;
   text-align: center;
   margin-top: 91px;
   margin-bottom: 5px; }
 
-.loginhere-link {
+.auth-mode-link {
   font-weight: 700;
   color: #222; }
 
@@ -307,5 +307,5 @@ input[type=checkbox]:not(old):checked + label > span:before {
     width: calc(100% - 40px);
     max-width: 100%; } }
 @media screen and (max-width: 480px) {
-  .signup-content {
+  .auth-content {
     padding: 50px 25px; } }
