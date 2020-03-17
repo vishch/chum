@@ -300,7 +300,9 @@ input[type=checkbox]:not(old):checked + label > span:before {
   margin-top: -32px;
   position: relative;
   z-index: 2;
-  color: #555; }
+  color: #555; 
+  cursor: pointer;
+}
 
 @media screen and (max-width: 768px) {
   .container {

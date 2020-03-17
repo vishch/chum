@@ -9,8 +9,10 @@
             <input ngModel type="email" class="form-input" name="email" id="email" placeholder="Your Email" />
           </div>
           <div class="form-group">
-            <input ngModel type="password" class="form-input" name="password" id="password" placeholder="Password" />
-            <span class="zmdi zmdi-eye-off field-icon toggle-password"></span>
+            <input ngModel #password type="password" class="form-input" name="password" id="password"
+              placeholder="Password" />
+            <i (click)="togglePassword($event.target, password)" class="fa fa-eye-slash field-icon"
+              aria-hidden="true"></i>
           </div>
           <div class="form-group">
             <input type="submit" name="submit" id="submit" class="form-submit" value="Login" />
