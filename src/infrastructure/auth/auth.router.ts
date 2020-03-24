@@ -33,7 +33,7 @@ export class AuthRouter {
   private addSignup(): void {
     this.#router.post('/signup', async (req: Request, res: Response) => {
       try {
-        const { username, password } = req.body;
+        const { name, email: username, password } = req.body;
 
         const success = await this.#authService.signup(username, password);
 
@@ -112,7 +112,3 @@ export class AuthRouter {
     });
   }
 }
-
-export {
-  AuthRouter as AuthRoutes,
-};

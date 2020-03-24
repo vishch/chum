@@ -13,7 +13,10 @@ export class LocalStrategy {
   }
 
   getStrategy(): Strategy {
-    return new Strategy(async (username:string, password:string, done: any) => {
+    return new Strategy({
+      usernameField: 'email',
+      passwordField: 'password',
+    }, async (username:string, password:string, done: any) => {
       try {
         this.#logger.info(`Checking if user exists - ${username}`);
 

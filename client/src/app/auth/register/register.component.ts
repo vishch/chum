@@ -1,7 +1,12 @@
-import { Component, OnInit, Input, Renderer2 } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AuthOptions } from '../auth-options.model';
 import { AuthMode } from '../auth-mode.enum';
 import { NgForm } from '@angular/forms';
+import { AuthUiService } from '../auth-ui.service';
+import { AuthService } from '../auth.service';
+import { Register } from './register.model';
+import { Subscription } from 'rxjs';
+import { AuthResponse } from '../auth-response.model';
 
 @Component({
   selector: 'app-register',
@@ -11,30 +16,38 @@ import { NgForm } from '@angular/forms';
     './register.component.scss'
   ]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+  private subscription = new Subscription();
+
   @Input() authOptions: AuthOptions;
 
   constructor(
-    private renderer: Renderer2
+    private authUiService: AuthUiService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   togglePassword(eyeElem: HTMLElement, passwordElem: HTMLInputElement) {
-    if (eyeElem.classList.contains('fa-eye')) {
-      this.renderer.setAttribute(passwordElem, 'type', 'password');
-      this.renderer.removeClass(eyeElem, 'fa-eye');
-      this.renderer.addClass(eyeElem, 'fa-eye-slash');
-    } else {
-      this.renderer.setAttribute(passwordElem, 'type', 'text');
-      this.renderer.removeClass(eyeElem, 'fa-eye-slash');
-      this.renderer.addClass(eyeElem, 'fa-eye');
-    }
+    this.authUiService.togglePassword(eyeElem, passwordElem);
   }
 
   onSubmit(form: NgForm): void {
-    // this.authOptions.authMode = AuthMode.Login;
+    const register: Register = {
+      name: form.value.name,
+      email: form.value.email,
+      password: form.value.password,
+    };
+
+    this.subscription.add(this.authService.signup(register).subscribe(
+      (resp: AuthResponse) => console.log('Signed up', resp.username),
+      (err: string) => console.log('got error >>>', err)
+    ));
   }
 
   onSwitchToLogin(): void {
