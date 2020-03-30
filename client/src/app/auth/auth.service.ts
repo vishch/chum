@@ -3,7 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthResponse } from './auth-response.model';
 import { AppUrls } from '../utils/AppUrls';
-import { Register } from './register/register.model';
+import { RegisterRequest } from './register/register-request.model';
+import { LoginRequest } from './login/login-request.model';
+import { RegisterResponse } from './register/register-response.model';
+import { LoginResponse } from './login/login-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +17,19 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
-  signup(register: Register): Observable<AuthResponse> {
+  register(registerRequest: RegisterRequest): Observable<RegisterResponse> {
     return this.http
-      .post<AuthResponse>(
-        `${AppUrls.Auth}/signup`,
-        register
+      .post<RegisterResponse>(
+        `${AppUrls.Auth}/register`,
+        registerRequest
+      );
+  }
+
+  login(loginRequest: LoginRequest): Observable<LoginResponse> {
+    return this.http
+      .post<LoginResponse>(
+        `${AppUrls.Auth}/login`,
+        loginRequest
       );
   }
 }

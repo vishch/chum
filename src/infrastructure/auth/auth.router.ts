@@ -9,6 +9,8 @@ import { Time } from 'utils';
 import { AuthService } from './auth.service';
 import type { AuthUser } from './auth-user.model';
 import type { JwtPayload } from './strategies/jwt-payload';
+import { LoginResponse } from './login-response.model';
+import { RegisterResponse } from './register-response.model';
 
 export class AuthRouter {
   readonly #logger: Logger;
@@ -26,16 +28,16 @@ export class AuthRouter {
 
   init(): void {
     this.#router = Router();
-    this.addSignup();
-    this.addSignin();
+    this.addRegister();
+    this.addLogin();
   }
 
-  private addSignup(): void {
-    this.#router.post('/signup', async (req: Request, res: Response) => {
+  private addRegister(): void {
+    this.#router.post('/register', async (req: Request, res: Response) => {
       try {
         const { name, email: username, password } = req.body;
 
-        const success = await this.#authService.signup(username, password);
+        const success = await this.#authService.register(username, password);
 
         if (!success) {
           const msg = 'User already exists';
@@ -47,7 +49,11 @@ export class AuthRouter {
 
         this.#logger.info('User created successfully');
 
-        res.status(200).send({ username });
+        const registerResponse: RegisterResponse = {
+          username,
+        };
+
+        res.status(200).json(registerResponse);
       } catch (error) {
         const msg = '1 req body should take the form { username, password }';
 
@@ -61,10 +67,10 @@ export class AuthRouter {
     });
   }
 
-  private addSignin(): void {
-    this.#router.post('/signin', async (req: Request, res: Response) => {
+  private addLogin(): void {
+    this.#router.post('/login', async (req: Request, res: Response) => {
       try {
-        const auth = passport.authenticate(
+        const authenticate = passport.authenticate(
           'local',
           { session: false },
           (error: string, user: AuthUser) => {
@@ -99,13 +105,18 @@ export class AuthRouter {
               this.#logger.info(`Setting up the token in cookie - ${token}`);
 
               res.cookie('jwt', token, { httpOnly: true });
-              res.status(200).json(user.username);
+
+              const loginResponse: LoginResponse = {
+                username: user.username,
+              };
+
+              res.status(200).json(loginResponse);
             });
           },
         );
 
         this.#logger.info('Attempt login');
-        auth(req, res);
+        authenticate(req, res);
       } catch (authError) {
         res.send(500).json(`Auth Error - ${authError}`);
       }

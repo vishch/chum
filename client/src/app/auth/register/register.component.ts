@@ -4,9 +4,9 @@ import { AuthMode } from '../auth-mode.enum';
 import { NgForm } from '@angular/forms';
 import { AuthUiService } from '../auth-ui.service';
 import { AuthService } from '../auth.service';
-import { Register } from './register.model';
+import { RegisterRequest } from './register-request.model';
 import { Subscription } from 'rxjs';
-import { AuthResponse } from '../auth-response.model';
+import { RegisterResponse } from './register-response.model';
 
 @Component({
   selector: 'app-register',
@@ -38,14 +38,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm): void {
-    const register: Register = {
+    const registerRequest: RegisterRequest = {
       name: form.value.name,
       email: form.value.email,
       password: form.value.password,
     };
 
-    this.subscription.add(this.authService.signup(register).subscribe(
-      (resp: AuthResponse) => console.log('Signed up', resp.username),
+    this.subscription.add(this.authService.register(registerRequest).subscribe(
+      (resp: RegisterResponse) => console.log('Registered', resp.username),
       (err: string) => console.log('got error >>>', err)
     ));
   }
