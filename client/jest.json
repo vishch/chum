@@ -1,0 +1,9 @@
+{
+  "preset": "jest-preset-angular",
+  "setupFilesAfterEnv": [
+    "<rootDir>/src/setupJest.ts"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/src/test.ts"
+  ]
+}
