@@ -13,7 +13,7 @@
     "watch": "tsc-watch --onSuccess \"yarn run watch-node\"",
     "watch-node": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
     "docker-up": "node -r ts-node/register -r tsconfig-paths/register dist/index.js",
-    "lint": "eslint \"src/**/*.{js,ts}\""
+    "lint": "eslint \"src/**/*.{js,ts}\" \"client/src/app/**/*.ts\""
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",

@@ -1,10 +1,14 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, Input, OnDestroy,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { AppUrls } from 'src/app/utils/app-urls';
 import { AuthOptions } from '../auth-options.model';
 import { AuthMode } from '../auth-mode.enum';
-import { NgForm } from '@angular/forms';
 import { AuthUiService } from '../auth-ui.service';
 import { LoginRequest } from './login-request.model';
-import { Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { LoginResponse } from './login-response.model';
 
@@ -13,8 +17,8 @@ import { LoginResponse } from './login-response.model';
   templateUrl: './login.component.html',
   styleUrls: [
     '../auth.component.scss',
-    './login.component.scss'
-  ]
+    './login.component.scss',
+  ],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
@@ -23,7 +27,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authUiService: AuthUiService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -44,8 +49,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this.subscription.add(this.authService.login(loginRequest).subscribe(
-      (resp: LoginResponse) => console.log('Logged in', resp.username),
-      (err: string) => console.log('got error >>>', err)
+      (resp: LoginResponse) => {
+        console.log('Logged in', resp.username);
+        this.router.navigateByUrl(AppUrls.Home);
+      },
+      (err: string) => console.log('got error >>>', err),
     ));
   }
 

@@ -5,7 +5,7 @@ import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   { path: 'auth', component: AuthComponent },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'home', loadChildren: () => import('./home/home.module').then((m) => m.HomeModule) },
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
   { path: '**', redirectTo: '/auth', pathMatch: 'full' },
 ];
@@ -13,8 +13,8 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(
     routes,
-    { enableTracing: false } // <-- debugging purposes only
+    { enableTracing: false }, // <-- debugging purposes only
   )],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

@@ -9,7 +9,6 @@
     "test": "jest --config jest.json",
     "test:watch": "jest --config jest.json --watch",
     "test:ci": "jest --config jest.json --runInBand",
-    "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,

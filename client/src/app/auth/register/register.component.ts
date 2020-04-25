@@ -1,11 +1,13 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, Input, OnDestroy,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { AuthOptions } from '../auth-options.model';
 import { AuthMode } from '../auth-mode.enum';
-import { NgForm } from '@angular/forms';
 import { AuthUiService } from '../auth-ui.service';
 import { AuthService } from '../auth.service';
 import { RegisterRequest } from './register-request.model';
-import { Subscription } from 'rxjs';
 import { RegisterResponse } from './register-response.model';
 
 @Component({
@@ -13,8 +15,8 @@ import { RegisterResponse } from './register-response.model';
   templateUrl: './register.component.html',
   styleUrls: [
     '../auth.component.scss',
-    './register.component.scss'
-  ]
+    './register.component.scss',
+  ],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
@@ -46,7 +48,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     this.subscription.add(this.authService.register(registerRequest).subscribe(
       (resp: RegisterResponse) => console.log('Registered', resp.username),
-      (err: string) => console.log('got error >>>', err)
+      (err: string) => console.log('got error >>>', err),
     ));
   }
 

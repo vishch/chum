@@ -2,13 +2,13 @@ import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { AuthServiceModule } from './auth-service.module';
 
 @Injectable({
-  providedIn: AuthServiceModule
+  providedIn: AuthServiceModule,
 })
 export class AuthUiService {
   private renderer: Renderer2;
 
   constructor(
-    rendererFactory: RendererFactory2
+    rendererFactory: RendererFactory2,
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
   }

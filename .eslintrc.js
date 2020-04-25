@@ -4,7 +4,10 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: "module",
-    project: './tsconfig.json',
+    project: [
+      './tsconfig.json',
+      './client/tsconfig.json'
+    ],
   },
   env: {
     'jest/globals': true,
@@ -20,7 +23,12 @@ module.exports = {
   ],
   settings: {
     "import/resolver": {
-      typescript: {}
+      typescript: {
+        "directory": [
+          "./tsconfig.json",
+          "./client/tsconfig.json"
+        ]
+      }
     },
     "node": {
       "resolvePaths": ["src"],
@@ -28,6 +36,9 @@ module.exports = {
     }
   },
   rules: {
+    'quotes': 'off',
+    'padded-blocks': 'off',
+    "@typescript-eslint/quotes": "off",
     'linebreak-style': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
     "node/no-extraneous-import": "off",
