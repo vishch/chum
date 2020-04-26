@@ -1,6 +1,6 @@
 export class AppUrls {
   static get Base(): string {
-    return "api/v1";
+    return "";
   }
 
   static get Auth(): string {

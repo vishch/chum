@@ -4,7 +4,9 @@ import {
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { AppUrls } from 'src/app/utils/app-urls';
+import { AppUrls } from 'src/app/utils/urls/app-urls';
+import { WebStorageService } from 'src/app/utils';
+import { StorageKeys } from 'src/app/utils/web-storage/storage-keys';
 import { AuthOptions } from '../auth-options.model';
 import { AuthMode } from '../auth-mode.enum';
 import { AuthUiService } from '../auth-ui.service';
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private authUiService: AuthUiService,
     private authService: AuthService,
     private router: Router,
+    private storageService: WebStorageService,
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.subscription.add(this.authService.login(loginRequest).subscribe(
       (resp: LoginResponse) => {
-        console.log('Logged in', resp.username);
+        const { username } = resp;
+        console.log('Logged in', username);
         this.router.navigateByUrl(AppUrls.Home);
       },
       (err: string) => console.log('got error >>>', err),
