@@ -1,5 +1,5 @@
 import { AuthUserRepo } from './auth-user.repo';
-import type { AuthUser } from './auth-user.model';
+import type { AuthUser } from './auth-user';
 
 export class AuthUserService {
   readonly #authUserRepo: AuthUserRepo;
@@ -8,7 +8,7 @@ export class AuthUserService {
     this.#authUserRepo = new AuthUserRepo();
   }
 
-  async register(username: string, passwordHash: string): Promise<AuthUser> {
+  async register(username: string, passwordHash: string): Promise<AuthUser | null> {
     const user = await this.findByUsername(username);
     if (user) {
       return null;

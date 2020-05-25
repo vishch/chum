@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { ConnectionOptions } from 'mongoose';
 import { MongoConfig } from 'utils/config';
 import { Logger } from '../logger';
 
@@ -16,7 +16,12 @@ export class OdmMongoose {
 
   public async init(): Promise<void> {
     const connection = `${this.#server}/${this.#dbName}`;
-    const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
+    const options: ConnectionOptions = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      autoIndex: false,
+    };
 
     try {
       this.#logger.info('Mongoose connecting...');

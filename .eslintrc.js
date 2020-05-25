@@ -14,6 +14,7 @@ module.exports = {
   },
   plugins: [
     'jest',
+    "import",
   ],
   extends: [
     'airbnb-typescript/base',
@@ -23,17 +24,8 @@ module.exports = {
   ],
   settings: {
     "import/resolver": {
-      typescript: {
-        "directory": [
-          "./tsconfig.json",
-          "./client/tsconfig.json"
-        ]
-      }
+      typescript: {}
     },
-    "node": {
-      "resolvePaths": ["src"],
-      "tryExtensions": [".js", ".json", ".ts"]
-    }
   },
   rules: {
     'quotes': 'off',
@@ -42,10 +34,13 @@ module.exports = {
     'linebreak-style': 'off',
     'node/no-unsupported-features/es-syntax': 'off',
     "node/no-extraneous-import": "off",
+    "node/no-missing-import": "off",
     'class-methods-use-this': 'off',
     'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     'lines-between-class-members': 'off',
     'consistent-return': 'off',
+    'import/no-cycle': 'off',
+    "arrow-parens": "off",
   }
 };

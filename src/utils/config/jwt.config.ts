@@ -1,6 +1,6 @@
 export class JwtConfig {
   static get SECRET(): string {
-    return process.env.TOKEN_SECRET;
+    return process.env.TOKEN_SECRET as string;
   }
 
   static get EXPIRATION_S(): number {

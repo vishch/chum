@@ -1,7 +1,8 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "strictNullChecks": true,
+    "baseUrl": "./src/app",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -17,7 +18,21 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@auth/*": [
+        "auth/*"
+      ],
+      "@home/*": [
+        "home/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@utils": [
+        "utils"
+      ],
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

@@ -1,5 +1,9 @@
 export class Time {
-  static NowInSec() {
-    return Math.floor(Date.now() / 1000);
+  static NowInSec(): number {
+    return Math.floor(Time.Now() / 1000);
+  }
+
+  static Now(): number {
+    return Date.now();
   }
 }

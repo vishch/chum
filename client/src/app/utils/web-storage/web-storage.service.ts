@@ -12,7 +12,8 @@ export class WebStorageService {
 
   getItem<T>(key: string): T {
     if (this.items[key] == null) {
-      this.items[key] = JSON.parse(localStorage.getItem(key));
+      const item = localStorage.getItem(key);
+      this.items[key] = item ? JSON.parse(item) : null;
     }
 
     return this.items[key];

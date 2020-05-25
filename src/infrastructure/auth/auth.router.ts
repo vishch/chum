@@ -7,7 +7,7 @@ import { Logger } from 'infrastructure';
 import { JwtConfig } from 'utils/config';
 import { Time } from 'utils';
 import { AuthService } from './auth.service';
-import type { AuthUser } from './auth-user.model';
+import type { AuthUser } from './auth-user';
 import type { JwtPayload } from './strategies/jwt-payload';
 import { LoginResponse } from './login-response.model';
 import { RegisterResponse } from './register-response.model';
@@ -83,7 +83,8 @@ export class AuthRouter {
             this.#logger.info(`Jwt Expire time - ${JwtConfig.EXPIRATION_S}`);
 
             const payload: JwtPayload = {
-              username: user.username,
+              userId: user.id,
+              userName: user.username,
               expires: Time.NowInSec() + JwtConfig.EXPIRATION_S,
             };
 

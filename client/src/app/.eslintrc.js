@@ -3,5 +3,6 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-useless-constructor': 'off',
     "node/no-missing-import": "off",
+    // "no-console": "off",
   }
 };

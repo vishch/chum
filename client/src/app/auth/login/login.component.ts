@@ -4,9 +4,7 @@ import {
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { AppUrls } from 'src/app/utils/urls/app-urls';
-import { WebStorageService } from 'src/app/utils';
-import { StorageKeys } from 'src/app/utils/web-storage/storage-keys';
+import { WebStorageService, AppUrls } from '@utils';
 import { AuthOptions } from '../auth-options.model';
 import { AuthMode } from '../auth-mode.enum';
 import { AuthUiService } from '../auth-ui.service';

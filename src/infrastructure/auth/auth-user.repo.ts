@@ -1,5 +1,5 @@
 import { AuthUserModel } from './auth-user.model.mongoose';
-import { AuthUser } from './auth-user.model';
+import { AuthUser } from './auth-user';
 
 export class AuthUserRepo {
   async register(username: string, passwordHash: string): Promise<AuthUser> {

@@ -8,7 +8,22 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": "src"
+    "baseUrl": "./src",
+    "strictNullChecks": true,
+    "paths": {
+      "@schemas": [
+        "infrastructure/data/common/schemas"
+      ],
+      "@core/models": [
+        "core/common/models"
+      ],
+      "@infrastructure/models": [
+        "infrastructure/api/models"
+      ],
+      "@utils": [
+        "utils"
+      ]
+    }
   },
   "include": [
     "src/**/*"
