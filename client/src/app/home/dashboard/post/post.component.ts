@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Post } from './post';
+import { CreatePost } from './create-post';
 import { PostService } from './post.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class PostComponent implements OnInit {
 
   onShare(): void {
     const { message } = this.postForm.value;
-    const post: Post = { message };
+    const post: CreatePost = { message };
 
     this.postService.save(post).subscribe(() => console.log("Post - Saved successfully!"));
   }

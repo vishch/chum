@@ -22,6 +22,15 @@ export class HttpService {
       );
   }
 
+  get<T>(url: string): Observable<T> {
+    return this.httpClient.get<ApiResponse<T>>(url)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError), // then handle the error
+        map(resp => resp && resp.data),
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

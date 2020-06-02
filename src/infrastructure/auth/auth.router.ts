@@ -53,14 +53,14 @@ export class AuthRouter {
           username,
         };
 
-        res.status(200).json(registerResponse);
+        return res.status(200).json(registerResponse);
       } catch (error) {
         const msg = '1 req body should take the form { username, password }';
 
         this.#logger.error(msg);
         this.#logger.error(error);
 
-        res.status(500).send({
+        return res.status(500).send({
           error: msg,
         });
       }
@@ -111,7 +111,7 @@ export class AuthRouter {
                 username: user.username,
               };
 
-              res.status(200).json(loginResponse);
+              return res.status(200).json(loginResponse);
             });
           },
         );
@@ -119,7 +119,7 @@ export class AuthRouter {
         this.#logger.info('Attempt login');
         authenticate(req, res);
       } catch (authError) {
-        res.send(500).json(`Auth Error - ${authError}`);
+        return res.send(500).json(`Auth Error - ${authError}`);
       }
     });
   }

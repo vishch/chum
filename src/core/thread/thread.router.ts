@@ -26,6 +26,7 @@ export class ThreadRouter {
   init(): void {
     this.#router = Router();
     this.addPost();
+    this.getLastSaved();
   }
 
   private addPost(): void {
@@ -40,11 +41,11 @@ export class ThreadRouter {
 
           const thread: Thread<PostContent> = this.mapToThread(message, userId, userName);
 
-          await this.#threadService.create(thread);
+          const newPost = await this.#threadService.create(thread);
 
           this.#logger.info(`Post Created - ${message} - By ${userName}`);
 
-          res.status(204).json(apiRes);
+          return res.status(201).json({ data: newPost });
         } catch (error) {
           this.#logger.error(`Post Creation Failed - ${message} - By ${userName}`);
           this.#logger.error(error);
@@ -54,7 +55,35 @@ export class ThreadRouter {
             message: "Post Creation Failed",
           };
 
-          res.status(500).json(apiRes);
+          return res.status(500).json(apiRes);
+        }
+      });
+  }
+
+  private getLastSaved(): void {
+    this.#router.get('/post',
+      async (req: Request, res: Response) => {
+        const apiRes: ApiResponse = {};
+        const { userName } = (req.user as JwtPayload);
+
+        try {
+          this.#logger.info(`Fetch last saved - By ${userName}`);
+
+          const lastPost = await this.#threadService.getLastSaved(userName);
+
+          this.#logger.info(`Last Post Fetched - ${lastPost && lastPost.content.message} - By ${userName}`);
+
+          return res.status(200).json({ data: lastPost });
+        } catch (error) {
+          this.#logger.error(`Last Post Fetch Failed - By ${userName}`);
+          this.#logger.error(error);
+
+          apiRes.error = {
+            code: 1001,
+            message: "Last Post Fetch Failed",
+          };
+
+          return res.status(500).json(apiRes);
         }
       });
   }
