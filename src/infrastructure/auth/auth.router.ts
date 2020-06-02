@@ -7,7 +7,7 @@ import { Logger } from 'infrastructure';
 import { JwtConfig } from 'utils/config';
 import { Time } from 'utils';
 import { AuthService } from './auth.service';
-import type { AuthUser } from './auth-user.model';
+import type { AuthUser } from './auth-user';
 import type { JwtPayload } from './strategies/jwt-payload';
 import { LoginResponse } from './login-response.model';
 import { RegisterResponse } from './register-response.model';
@@ -53,14 +53,14 @@ export class AuthRouter {
           username,
         };
 
-        res.status(200).json(registerResponse);
+        return res.status(200).json(registerResponse);
       } catch (error) {
         const msg = '1 req body should take the form { username, password }';
 
         this.#logger.error(msg);
         this.#logger.error(error);
 
-        res.status(500).send({
+        return res.status(500).send({
           error: msg,
         });
       }
@@ -83,7 +83,8 @@ export class AuthRouter {
             this.#logger.info(`Jwt Expire time - ${JwtConfig.EXPIRATION_S}`);
 
             const payload: JwtPayload = {
-              username: user.username,
+              userId: user.id,
+              userName: user.username,
               expires: Time.NowInSec() + JwtConfig.EXPIRATION_S,
             };
 
@@ -110,7 +111,7 @@ export class AuthRouter {
                 username: user.username,
               };
 
-              res.status(200).json(loginResponse);
+              return res.status(200).json(loginResponse);
             });
           },
         );
@@ -118,7 +119,7 @@ export class AuthRouter {
         this.#logger.info('Attempt login');
         authenticate(req, res);
       } catch (authError) {
-        res.send(500).json(`Auth Error - ${authError}`);
+        return res.send(500).json(`Auth Error - ${authError}`);
       }
     });
   }

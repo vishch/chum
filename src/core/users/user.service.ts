@@ -1,5 +1,5 @@
 import { UserRepo } from './user.repo';
-import type { User } from './user.model';
+import type { User } from './user';
 
 export class UserService {
   readonly #userRepo: UserRepo;

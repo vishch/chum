@@ -25,7 +25,7 @@ export class UserRouter {
       async (req: Request, res: Response) => {
         this.#logger.info('Accessed Profile');
 
-        res.status(200).json(`Profile Authenticated for - ${(req.user as JwtPayload).username}`);
+        res.status(200).json(`Profile Authenticated for - ${(req.user as JwtPayload).userName}`);
       });
   }
 }
